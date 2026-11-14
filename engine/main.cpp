@@ -642,7 +642,7 @@ void setupscreen()
     curvsync = -1;
 
     SDL_Rect desktop;
-    if(SDL_GetDisplayBounds(0, &desktop) < 0) fatal("failed querying desktop bounds: %s", SDL_GetError());
+    if(SDL_GetDisplayBounds(0, &desktop) < 0) fatal("Failed to get display bounds: %s", SDL_GetError());
     desktopw = desktop.w;
     desktoph = desktop.h;
 
@@ -719,8 +719,8 @@ void setupscreen()
         }
         if(glcontext) break;
     }
-    if(!screen) fatal("failed to create OpenGL window: %s", SDL_GetError());
-    else if(!glcontext) fatal("failed to create OpenGL context: %s", SDL_GetError());
+    if(!screen) fatal("Failed to create OpenGL window: %s", SDL_GetError());
+    else if(!glcontext) fatal("Failed to create OpenGL context: %s", SDL_GetError());
     else
     {
         if(depthbits && (config&1)==0) conoutf(CON_WARN, "%d bit z-buffer not supported - disabling", depthbits);
@@ -784,7 +784,7 @@ void resetgl()
        !reloadtexture("data/mapshot_frame.png") ||
        !reloadtexture("data/loading_frame.png") ||
        !reloadtexture("data/loading_bar.png"))
-        fatal("failed to reload core texture");
+        fatal("Failed to reload core texture");
     reloadfonts();
     inbetweenframes = true;
     renderbackground("initializing...");
@@ -1061,7 +1061,7 @@ void limitfps(int &millis, int curmillis)
 #if defined(WIN32) && !defined(_DEBUG) && !defined(__GNUC__)
 void stackdumper(unsigned int type, EXCEPTION_POINTERS *ep)
 {
-    if(!ep) fatal("unknown type");
+    if(!ep) fatal("Unknown type");
     EXCEPTION_RECORD *er = ep->ExceptionRecord;
     CONTEXT *context = ep->ContextRecord;
     char out[512];
@@ -1237,7 +1237,7 @@ int main(int argc, char **argv)
     {
         logoutf("init: sdl");
 
-        if(SDL_Init(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_AUDIO)<0) fatal("Unable to initialize SDL: %s", SDL_GetError());
+        if(SDL_Init(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_AUDIO)<0) fatal("Failed to initialize SDL: %s", SDL_GetError());
 
 #ifdef SDL_VIDEO_DRIVER_X11
         SDL_version version;
@@ -1248,7 +1248,7 @@ int main(int argc, char **argv)
     }
     
     logoutf("init: net");
-    if(enet_initialize()<0) fatal("Unable to initialise network module");
+    if(enet_initialize()<0) fatal("Failed to initialize network module");
     atexit(enet_deinitialize);
     enet_time_set(0);
 
@@ -1271,12 +1271,12 @@ int main(int argc, char **argv)
     gl_checkextensions();
     gl_init();
     notexture = textureload("packages/textures/notexture.png");
-    if(!notexture) fatal("could not find core textures");
+    if(!notexture) fatal("Failed to find core textures");
 
     logoutf("init: console");
-    if(!execfile("data/stdlib.cfg", false)) fatal("cannot find data files (you are running from the wrong folder, try .bat file in the main folder)");   // this is the first file we load.
-    if(!execfile("data/font.cfg", false)) fatal("cannot find font definitions");
-    if(!setfont("default")) fatal("no default font specified");
+    if(!execfile("data/stdlib.cfg", false)) fatal("Failed to find data files");   // this is the first file we load.
+    if(!execfile("data/font.cfg", false)) fatal("Failed to find font definitions");
+    if(!setfont("default")) fatal("No default font specified");
 
     inbetweenframes = true;
     renderbackground("initializing...");

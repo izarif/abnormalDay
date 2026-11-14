@@ -243,7 +243,7 @@ void gl_checkextensions()
     if(sscanf(version, " %u.%u", &glmajorversion, &glminorversion) != 2) glversion = 100;
     else glversion = glmajorversion*100 + glminorversion*10;
 
-    if(glversion < 200) fatal("OpenGL 2.0 or greater is required!");
+    if(glversion < 200) fatal("OpenGL 2.0 or greater is required");
 
 #ifdef WIN32
     glActiveTexture_ =            (PFNGLACTIVETEXTUREPROC)            getprocaddress("glActiveTexture");
@@ -371,7 +371,7 @@ void gl_checkextensions()
     uint glslmajorversion, glslminorversion;
     if(glslstr && sscanf(glslstr, " %u.%u", &glslmajorversion, &glslminorversion) == 2) glslversion = glslmajorversion*100 + glslminorversion;
 
-    if(glslversion < 120) fatal("GLSL 1.20 or greater is required!");
+    if(glslversion < 120) fatal("GLSL 1.20 or greater is required");
 
     parseglexts();
 
@@ -442,7 +442,7 @@ void gl_checkextensions()
             if(dbgexts) conoutf(CON_INIT, "Using GL_EXT_packed_depth_stencil extension.");
         }
     }
-    else fatal("Framebuffer object support is required!");
+    else fatal("Framebuffer object support is required");
 
     extern int fpdepthfx;
     if(ati)

@@ -895,12 +895,12 @@ static void setupwindow(const char *title)
 {
 	copystring(apptip, title);
 	//appinstance = GetModuleHandle(NULL);
-	if(!appinstance) fatal("failed getting application instance");
+	if(!appinstance) fatal("Failed to get application instance");
 	appicon = LoadIcon(appinstance, MAKEINTRESOURCE(IDI_ICON1));//(HICON)LoadImage(appinstance, MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
-	if(!appicon) fatal("failed loading icon");
+	if(!appicon) fatal("Failed to load icon");
 
 	appmenu = CreatePopupMenu();
-	if(!appmenu) fatal("failed creating popup menu");
+	if(!appmenu) fatal("Failed to create popup menu");
     AppendMenu(appmenu, MF_STRING, MENU_OPENCONSOLE, "Open Console");
     AppendMenu(appmenu, MF_SEPARATOR, 0, NULL);
 	AppendMenu(appmenu, MF_STRING, MENU_EXIT, "Exit");
@@ -918,14 +918,14 @@ static void setupwindow(const char *title)
 	wc.cbWndExtra = 0;
 	wc.cbClsExtra = 0;
 	wndclass = RegisterClass(&wc);
-	if(!wndclass) fatal("failed registering window class");
+	if(!wndclass) fatal("Failed to register window class");
 	
 	appwindow = CreateWindow(MAKEINTATOM(wndclass), title, 0, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, HWND_MESSAGE, NULL, appinstance, NULL);
-	if(!appwindow) fatal("failed creating window");
+	if(!appwindow) fatal("Failed to create window");
 
 	atexit(cleanupwindow);
 
-    if(!setupsystemtray(WM_APP)) fatal("failed adding to system tray");
+    if(!setupsystemtray(WM_APP)) fatal("Failed to add to system tray");
 }
 
 static char *parsecommandline(const char *src, vector<char *> &args)
@@ -1143,7 +1143,7 @@ vector<const char *> gameargs;
 int main(int argc, char **argv)
 {   
     setlogfile(NULL);
-    if(enet_initialize()<0) fatal("Unable to initialise network module");
+    if(enet_initialize()<0) fatal("Failed to initialize network module");
     atexit(enet_deinitialize);
     enet_time_set(0);
     for(int i = 1; i<argc; i++) if(argv[i][0]!='-' || !serveroption(argv[i])) gameargs.add(argv[i]);

@@ -209,18 +209,18 @@ void setupserver(int port, const char *ip = NULL)
     if(ip)
     {
         if(enet_address_set_host(&address, ip)<0)
-            fatal("failed to resolve server address: %s", ip);
+            fatal("Failed to resolve server address: %s", ip);
     }
     serversocket = enet_socket_create(ENET_SOCKET_TYPE_STREAM);
     if(serversocket==ENET_SOCKET_NULL ||
        enet_socket_set_option(serversocket, ENET_SOCKOPT_REUSEADDR, 1) < 0 ||
        enet_socket_bind(serversocket, &address) < 0 ||
        enet_socket_listen(serversocket, -1) < 0)
-        fatal("failed to create server socket");
+        fatal("Failed to create server socket");
     if(enet_socket_set_option(serversocket, ENET_SOCKOPT_NONBLOCK, 1)<0)
-        fatal("failed to make server socket non-blocking");
+        fatal("Failed to make server socket non-blocking");
     if(!setuppingsocket(&address))
-        fatal("failed to create ping socket");
+        fatal("Failed to create ping socket");
 
     enet_time_set(0);
 
@@ -677,7 +677,7 @@ void reloadsignal(int signum)
 
 int main(int argc, char **argv)
 {
-    if(enet_initialize()<0) fatal("Unable to initialise network module");
+    if(enet_initialize()<0) fatal("Failed to initialize network module");
     atexit(enet_deinitialize);
 
     const char *dir = "", *ip = NULL;
