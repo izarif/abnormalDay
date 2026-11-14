@@ -1,0 +1,9 @@
+include/**/*.h
+lib/*.dll
+lib/*.a
+lib64/*.dll
+lib64/*.a
+Makefile
+client.make
+bin/
+obj/

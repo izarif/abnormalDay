@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>abnormalDay</title>
+  </head>
+  <body>
+    <h1>abnormalDay</h1>
+    <p>Yet another attempt to create a game using the <a href="https://sauerbraten.org/">Sauerbraten</a> engine</p>
+    <h2>Building</h2>
+    <ol>
+      <li>Download <a href="https://jmeubank.github.io/tdm-gcc/">TDM GCC 10.3.0</a></li>
+      <li>Install <span class="code1">TDM GCC 10.3.0</span></li>
+      <li>Download <a href="https://www.mediafire.com/file/ta3we60phrecgn1/MinGW32-Make-441.zip/file">mingw32-make</a></li>
+      <li>Download <a href="https://premake.github.io/">Premake</a></li>
+       <li>Build dependencies</li>
+       <li>Move <span class="code1">.dll</span> files of dependencies to <span class="code1">&lt;thisProjectFolderPath&gt;\lib\</span> folder</li>
+       <li>Move <span class="code1">.h</span> files of dependencies to <span class="code1">&lt;thisProjectFolderPath&gt;\include\</span> folder</li>
+      <li>Run <span class="code1">cmd.exe</span></li>
+      <li>
+        Execute the following commands:
+        <pre><div class="code1">
+&gt; set "PATH=%PATH%;C:\TDM-GCC-64\bin\;"
+&gt; cd &lt;thisProjectFolderPath&gt;
+&gt; &lt;premakeExePath&gt; gmake
+&gt; &lt;mingw32MakeExePath&gt; config=release_32bit
+      </div></pre>
+      <p>Where <span class="code1">&lt;thisProjectFolderPath&gt;</span> is something like <span class="code1">C:\Users\zar-s\projects\abnormalDay\</span></p>
+        <p>Where <span class="code1">&lt;premakeExePath&gt;</span> is something like <span class="code1">C:\Users\zar-s\soft\premake5.exe</span></p>
+        <p>Where <span class="code1">&lt;mingw32MakeExePath&gt;</span> is something like <span class="code1">C:\Users\zar-s\soft\mingw32-make.exe</span></p>
+        <p>After executing these commands <span class="code1">&lt;thisProjectDir&gt;\bin\client.exe</span> file will be created</p>
+      </li>
+    </ol>
+  </body>
+</html>
