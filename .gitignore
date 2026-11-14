@@ -4,6 +4,6 @@ lib/*.a
 lib64/*.dll
 lib64/*.a
 Makefile
-client.make
+game.make
 bin/
 obj/

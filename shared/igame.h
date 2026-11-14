@@ -128,3 +128,6 @@ namespace server
     extern int scaletime(int t);
 }
 
+
+#define GAME_ID "fps"
+#define GAME_NAME "Cube 2: Sauerbraten"

@@ -14,7 +14,7 @@ workspace("sauerbraten")
   filter("configurations:release")
   optimize("Speed")
 
-project("client")
+project("game")
   language("C++")
   kind("WindowedApp")
   rtti("Off")
@@ -101,7 +101,7 @@ project("client")
 
   filter("system:windows")
   files{
-    "vcpp/sauerbraten.rc",
+    "vcpp/game.rc",
   }
 
   includedirs{

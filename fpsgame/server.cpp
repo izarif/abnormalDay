@@ -12,7 +12,7 @@ namespace game
                 conoutf(CON_ERROR, "unknown command-line option: %s", args[i]);
     }
 
-    const char *gameident() { return "fps"; }
+    const char *gameident() { return GAME_ID; }
 }
 
 VAR(regenbluearmour, 0, 1, 1);
