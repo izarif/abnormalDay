@@ -217,7 +217,7 @@ static int savemapprogress = 0;
 
 void savec(cube *c, const ivec &o, int size, stream *f, bool nolms)
 {
-    if((savemapprogress++&0xFFF)==0) renderprogress(float(savemapprogress)/allocnodes, "saving octree...");
+    if((savemapprogress++&0xFFF)==0) renderprogress(float(savemapprogress)/allocnodes, "Saving octree");
 
     loopi(8)
     {
@@ -890,7 +890,7 @@ bool save_world(const char *mname, bool nolms)
     }
 
     savemapprogress = 0;
-    renderprogress(0, "saving map...");
+    renderprogress(0, "Saving map");
 
     octaheader hdr;
     memcpy(hdr.magic, "OCTA", 4);
@@ -967,12 +967,12 @@ bool save_world(const char *mname, bool nolms)
 
     savevslots(f, numvslots);
 
-    renderprogress(0, "saving octree...");
+    renderprogress(0, "Saving octree");
     savec(worldroot, ivec(0, 0, 0), worldsize>>1, f, nolms);
 
     if(!nolms) 
     {
-        if(lightmaps.length()) renderprogress(0, "saving lightmaps...");
+        if(lightmaps.length()) renderprogress(0, "Saving lightmaps");
         loopv(lightmaps)
         {
             LightMap &lm = lightmaps[i];
@@ -983,11 +983,11 @@ bool save_world(const char *mname, bool nolms)
                 f->putlil<ushort>(ushort(lm.unlity));
             }
             f->write(lm.data, lm.bpp*LM_PACKW*LM_PACKH);
-            renderprogress(float(i+1)/lightmaps.length(), "saving lightmaps...");
+            renderprogress(float(i+1)/lightmaps.length(), "Saving lightmaps");
         }
-        if(getnumviewcells()>0) { renderprogress(0, "saving pvs..."); savepvs(f); }
+        if(getnumviewcells()>0) { renderprogress(0, "Saving PVS"); savepvs(f); }
     }
-    if(shouldsaveblendmap()) { renderprogress(0, "saving blendmap..."); saveblendmap(f); }
+    if(shouldsaveblendmap()) { renderprogress(0, "Saving blendmap"); saveblendmap(f); }
 
     delete f;
     conoutf("wrote map file %s", ogzname);
@@ -1062,7 +1062,7 @@ bool load_world(const char *mname, const char *cname)        // still supports a
         else lilswap(&hdr.numvslots, 1);
     }
 
-    renderprogress(0, "clearing world...");
+    renderprogress(0, "Clearing world");
 
     freeocta(worldroot);
     worldroot = NULL;
@@ -1072,7 +1072,7 @@ bool load_world(const char *mname, const char *cname)        // still supports a
     setvar("mapsize", 1<<worldscale, true, false);
     setvar("mapscale", worldscale, true, false);
 
-    renderprogress(0, "loading vars...");
+    renderprogress(0, "Loading vars");
  
     loopi(hdr.numvars)
     {
@@ -1152,7 +1152,7 @@ bool load_world(const char *mname, const char *cname)        // still supports a
         loopi(nummru) texmru.add(f->getlil<ushort>());
     }
 
-    renderprogress(0, "loading entities...");
+    renderprogress(0, "Loading entities");
 
     vector<extentity *> &ents = entities::getents();
     int einfosize = entities::extraentinfosize();
@@ -1201,22 +1201,22 @@ bool load_world(const char *mname, const char *cname)        // still supports a
         f->seek((hdr.numents-MAXENTS)*(samegame ? sizeof(entity) + einfosize : eif), SEEK_CUR);
     }
 
-    renderprogress(0, "loading slots...");
+    renderprogress(0, "Loading slots");
     loadvslots(f, hdr.numvslots);
 
-    renderprogress(0, "loading octree...");
+    renderprogress(0, "Loading octree");
     bool failed = false;
     worldroot = loadchildren(f, ivec(0, 0, 0), hdr.worldsize>>1, failed);
     if(failed) conoutf(CON_ERROR, "garbage in map");
 
-    renderprogress(0, "validating...");
+    renderprogress(0, "Validating");
     validatec(worldroot, hdr.worldsize>>1);
 
     if(!failed)
     {
         if(hdr.version >= 7) loopi(hdr.lightmaps)
         {
-            renderprogress(i/(float)hdr.lightmaps, "loading lightmaps...");
+            renderprogress(i/(float)hdr.lightmaps, "Loading lightmaps");
             LightMap &lm = lightmaps.add();
             if(hdr.version >= 17)
             {

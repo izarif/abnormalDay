@@ -1078,7 +1078,7 @@ void shader(int *type, char *name, char *vs, char *ps)
 {
     if(lookupshaderbyname(name)) return;
    
-    defformatstring(info, "shader %s", name);
+    defformatstring(info, "Shader %s", name);
     renderprogress(loadprogress, info);
 
     vector<char> vsbuf, psbuf, vsbak, psbak;
@@ -1464,7 +1464,7 @@ void reloadshaders()
     {
         if(!s.standard && !(s.type&(SHADER_DEFERRED|SHADER_INVALID)) && !s.variantshader) 
         {
-            defformatstring(info, "shader %s", s.name);
+            defformatstring(info, "Shader %s", s.name);
             renderprogress(0.0, info);
             if(!s.compile()) s.cleanup(true);
             loopv(s.variants)

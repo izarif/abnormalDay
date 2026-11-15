@@ -2202,7 +2202,7 @@ void patchlight(int *quality)
     calclight_canceled = false;
     check_calclight_progress = false;
     SDL_TimerID timer = SDL_AddTimer(250, calclighttimer, NULL);
-    if(patchnormals) renderprogress(0, "computing normals...");
+    if(patchnormals) renderprogress(0, "Computing normals");
     Uint32 start = SDL_GetTicks();
     if(patchnormals) calcnormals(lerptjoints > 0);
     show_calclight_progress();
@@ -2235,7 +2235,7 @@ COMMAND(patchlight, "i");
 void clearlightmaps()
 {
     if(noedit(true)) return;
-    renderprogress(0, "clearing lightmaps...");
+    renderprogress(0, "Clearing lightmaps");
     resetlightmaps(false);
     clearsurfaces(worldroot);
     initlights();

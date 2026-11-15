@@ -1653,7 +1653,7 @@ void compactvslot(VSlot &vs)
 
 void compactvslots(cube *c, int n)
 {
-    if((compactvslotsprogress++&0xFFF)==0) renderprogress(min(float(compactvslotsprogress)/allocnodes, 1.0f), markingvslots ? "marking slots..." : "compacting slots...");
+    if((compactvslotsprogress++&0xFFF)==0) renderprogress(min(float(compactvslotsprogress)/allocnodes, 1.0f), markingvslots ? "Marking slots" : "Compacting slots");
     loopi(n)
     {
         if(c[i].children) compactvslots(c[i].children);
@@ -2769,7 +2769,7 @@ void initenvmaps()
 void genenvmaps()
 {
     if(envmaps.empty()) return;
-    renderprogress(0, "generating environment maps...");
+    renderprogress(0, "Generating environment maps");
     int lastprogress = SDL_GetTicks();
     loopv(envmaps)
     {
@@ -2779,7 +2779,7 @@ void genenvmaps()
         int millis = SDL_GetTicks();
         if(millis - lastprogress >= 250)
         {
-            renderprogress(float(i+1)/envmaps.length(), "generating environment maps...", 0, true);
+            renderprogress(float(i+1)/envmaps.length(), "Generating environment maps", 0, true);
             lastprogress = millis;
         }
     }

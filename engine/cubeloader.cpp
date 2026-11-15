@@ -250,7 +250,7 @@ struct cubeloader
             if((progress++&0x7F)==0)
             {
                 float bar = float((y1-y0+2)*(x-x0+1) + y-y0+1) / float((y1-y0+2)*(x1-x0+2));
-                defformatstring(text, "creating cubes... %d%%", int(bar*100));
+                defformatstring(text, "Creating cubes %d%%", int(bar*100));
                 renderprogress(bar, text);
             }
         }

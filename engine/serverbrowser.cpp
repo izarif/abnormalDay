@@ -144,7 +144,7 @@ bool resolverwait(const char *name, ENetAddress *address)
 {
     if(resolverthreads.empty()) resolverinit();
 
-    defformatstring(text, "resolving %s... (esc to abort)", name);
+    defformatstring(text, "Resolving %s [ESC] - Abort", name);
     renderprogress(0, text);
 
     SDL_LockMutex(resolvermutex);
@@ -185,7 +185,7 @@ bool resolverwait(const char *name, ENetAddress *address)
 
 int connectwithtimeout(ENetSocket sock, const char *hostname, const ENetAddress &address)
 {
-    defformatstring(text, "connecting to %s... (esc to abort)", hostname);
+    defformatstring(text, "Connecting to %s [ESC] - Abort", hostname);
     renderprogress(0, text);
 
     ENetSocketSet readset, writeset;
@@ -623,7 +623,7 @@ void retrieveservers(vector<char> &data)
     if(sock == ENET_SOCKET_NULL) return;
 
     extern char *mastername;
-    defformatstring(text, "retrieving servers from %s... (esc to abort)", mastername);
+    defformatstring(text, "Retrieving servers from %s [ESC] - Abort", mastername);
     renderprogress(0, text);
 
     int starttime = SDL_GetTicks(), timeout = 0;
