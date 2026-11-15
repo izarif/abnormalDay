@@ -359,6 +359,9 @@ void renderprogress(float bar, const char *text, GLuint tex, bool background)   
     gle::defvertex(2);
     gle::deftexcoord0();
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     float fh = 0.075f*min(w, h), fw = fh*10,
           fx = renderedframe ? w - fw - fh/4 : 0.5f*(w - fw), 
           fy = renderedframe ? fh/4 : h - fh*1.5f,
@@ -366,9 +369,6 @@ void renderprogress(float bar, const char *text, GLuint tex, bool background)   
           fv1 = 0/64.0f, fv2 = 52/64.0f;
     settexture("data/loading_frame.png", 3);
     bgquad(fx, fy, fw, fh, fu1, fv1, fu2-fu1, fv2-fv1);
-
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     float bw = fw*(511 - 2*17)/511.0f, bh = fh*20/52.0f,
           bx = fx + fw*17/511.0f, by = fy + fh*16/52.0f,
