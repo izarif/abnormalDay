@@ -2127,7 +2127,7 @@ void calclight(int *quality)
         conoutf(CON_ERROR, "valid range for calclight quality is -1..1"); 
         return;
     }
-    renderbackground("computing lightmaps... (esc to abort)");
+    renderbackground("Computing lightmaps [ESC] - Abort");
     mpremip(true);
     optimizeblendmap();
     loadlayermasks();
@@ -2160,7 +2160,7 @@ void calclight(int *quality)
     }
     if(!editmode) compressed.clear();
     initlights();
-    renderbackground("lighting done...");
+    renderbackground("Lighting done");
     allchanged();
     if(calclight_canceled)
         conoutf("calclight aborted");
@@ -2184,7 +2184,7 @@ void patchlight(int *quality)
         conoutf(CON_ERROR, "valid range for patchlight quality is -1..1"); 
         return;
     }
-    renderbackground("patching lightmaps... (esc to abort)");
+    renderbackground("Patching lightmaps [ESC] - Abort");
     loadlayermasks();
     int numthreads = lightthreads > 0 ? lightthreads : numcpus;
     if(numthreads > 1) preloadusedmapmodels(false, true);
@@ -2218,7 +2218,7 @@ void patchlight(int *quality)
         lumels += lightmaps[i].lumels;
     }
     initlights();
-    renderbackground("lighting done...");
+    renderbackground("Lighting done");
     allchanged();
     if(calclight_canceled)
         conoutf("patchlight aborted");

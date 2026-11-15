@@ -737,7 +737,7 @@ void resetgl()
 {
     clearchanges(CHANGE_GFX);
 
-    renderbackground("resetting OpenGL");
+    renderbackground("Resetting OpenGL");
 
     extern void cleanupva();
     extern void cleanupparticles();
@@ -787,7 +787,7 @@ void resetgl()
         fatal("Failed to reload core texture");
     reloadfonts();
     inbetweenframes = true;
-    renderbackground("initializing...");
+    renderbackground("Initializing");
     restoregamma();
     restorevsync();
     reloadshaders();
@@ -1279,7 +1279,7 @@ int main(int argc, char **argv)
     if(!setfont("default")) fatal("No default font specified");
 
     inbetweenframes = true;
-    renderbackground("initializing...");
+    renderbackground("Initializing");
 
     logoutf("init: world");
     camera1 = player = game::iterdynents(0);

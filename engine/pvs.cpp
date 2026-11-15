@@ -1104,7 +1104,7 @@ void genpvs(int *viewcellsize)
         return;
     }
 
-    renderbackground("generating PVS (esc to abort)");
+    renderbackground("Generating PVS [ESC] - Abort");
     genpvs_canceled = false;
     Uint32 start = SDL_GetTicks();
 

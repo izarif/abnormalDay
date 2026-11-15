@@ -284,7 +284,7 @@ struct cubeloader
         emptymap(12, true, NULL);
         freeocta(worldroot);
         worldroot = newcubes(F_SOLID);
-        defformatstring(cs, "importing %s", cgzname);
+        defformatstring(cs, "Importing %s", cgzname);
         renderbackground(cs);
         if(hdr.version>=4)
         {
