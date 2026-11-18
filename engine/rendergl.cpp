@@ -1,6 +1,7 @@
 // rendergl.cpp: core opengl rendering stuff
 
 #include "engine.h"
+#include "rGui/rGui.h"
 
 bool hasVAO = false, hasFBO = false, hasAFBO = false, hasDS = false, hasTF = false, hasTRG = false, hasTSW = false, hasS3TC = false, hasFXT1 = false, hasLATC = false, hasRGTC = false, hasAF = false, hasFBB = false, hasUBO = false, hasMBR = false;
 
@@ -2355,6 +2356,8 @@ void gl_drawhud()
 
     g3d_limitscale((2*limitgui - conh) / float(conh));
     g3d_render2d();
+
+    rGui::context->Render();
 
     glEnable(GL_BLEND);
 
