@@ -13,6 +13,9 @@ workspace("sauerbraten")
 
   filter("configurations:release")
   optimize("Speed")
+  defines{
+    "NDEBUG",
+  }
 
 project("game")
   language("C++")
@@ -82,6 +85,9 @@ project("game")
     "fpsgame/server.cpp",
     "fpsgame/waypoint.cpp",
     "fpsgame/weapon.cpp",
+    "engine/rGui/ShellFileInterface.cpp",
+    "engine/rGui/SystemInterfaceSDL2GL.cpp",
+    "engine/rGui/RenderInterfaceSDL2GL.cpp",
   }
 
   filter{"system:windows", "platforms:32bit"}
@@ -120,6 +126,9 @@ project("game")
     "SDL2",
     "SDL2_image",
     "SDL2_mixer",
+    "RocketCore",
+    "RocketControls",
+    "RocketDebugger",
   }
 
   filter("system:macosx")
@@ -135,6 +144,9 @@ project("game")
     "SDL2.framework",
     "SDL2_image.framework",
     "SDL2_mixer.framework",
+    "RocketCore",
+    "RocketControls",
+    "RocketDebugger",
   }
 
   filter("system:not windows", "system:not macosx")
@@ -147,4 +159,7 @@ project("game")
     "SDL2",
     "SDL2_image",
     "SDL2_mixer",
+    "RocketCore",
+    "RocketControls",
+    "RocketDebugger",
   }

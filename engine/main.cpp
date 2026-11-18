@@ -6,6 +6,16 @@
 #include "SDL_syswm.h"
 #endif
 
+#include <Rocket/Core.h>
+#include <Rocket/Core/Input.h>
+#include <Rocket/Debugger/Debugger.h>
+
+#include "rgui/ShellFileInterface.h"
+#include "rgui/SystemInterfaceSDL2GL.h"
+#include "rgui/RenderInterfaceSDL2GL.h"
+
+Rocket::Core::Context *rGuiContext;
+
 extern void cleargamma();
 
 void cleanup()
@@ -25,6 +35,10 @@ void cleanup()
     #ifdef __APPLE__
         if(screen) SDL_SetWindowFullscreen(screen, 0);
     #endif
+
+    rGuiContext->RemoveReference();
+    Rocket::Core::Shutdown();
+
     SDL_Quit();
 }
 
@@ -1021,6 +1035,9 @@ void checkinput()
                 break;
         }
     }
+
+    rGuiContext->Update();
+
     if(focused) { if(grabinput != (focused>0)) inputgrab(grabinput = focused>0, shouldgrab); focused = 0; }
     if(mousemoved) resetmousemotion();
 }
@@ -1294,6 +1311,29 @@ int main(int argc, char **argv)
     execfile("data/stdedit.cfg");
     execfile("data/sounds.cfg");
     execfile("data/menus.cfg");
+
+    ShellFileInterface rGuiFileInterface = ShellFileInterface("data/");
+    RocketSDL2GLRenderer rGuiRenderer = RocketSDL2GLRenderer(glcontext);
+    RocketSDL2GLSystemInterface rGuiSystemInterface = RocketSDL2GLSystemInterface();
+
+    Rocket::Core::SetFileInterface(&rGuiFileInterface);
+    Rocket::Core::SetSystemInterface(&rGuiSystemInterface);
+    Rocket::Core::SetRenderInterface(&rGuiRenderer);
+
+    if (!Rocket::Core::Initialise())
+    {
+      fatal("Failed to initialize rocket gui");
+    }
+
+    rGuiContext = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(screenw, screenh));
+    Rocket::Debugger::Initialise(rGuiContext);
+    Rocket::Core::ElementDocument* mainMenuDoc = rGuiContext->LoadDocument("mainMenu.rml");
+
+    if (!mainMenuDoc)
+    {
+      fatal("Failed to load main menu");
+    }
+
     execfile("data/heightmap.cfg");
     execfile("data/blendbrush.cfg");
     defformatstring(gamecfgname, "data/game_%s.cfg", game::gameident());
@@ -1383,6 +1423,9 @@ int main(int argc, char **argv)
         inbetweenframes = false;
         if(mainmenu) gl_drawmainmenu();
         else gl_drawframe();
+
+        rGuiContext->Render();
+
         swapbuffers();
         renderedframe = inbetweenframes = true;
     }
